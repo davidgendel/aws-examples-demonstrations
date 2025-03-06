@@ -14,10 +14,15 @@ pip install selenium webdriver-manager beautifulsoup4 requests
 ## Run the Script:
 ```
 python your_script.py <start_url> <output_file> --crawl_delay 1 --max_depth 2 --timeout 30
+
 <start_url>: The website to crawl (e.g., https://www.example.com).
+
 <output_file>: The path to the output JSONL file (e.g., output.jsonl).
+
 --crawl_delay: Delay between requests (in seconds).
+
 --max_depth: Maximum crawl depth.
+
 --timeout: Selenium timeout in seconds.
 ```
 
