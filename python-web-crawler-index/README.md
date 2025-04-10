@@ -28,7 +28,5 @@ python your_script.py <start_url> <output_file> --crawl_delay 1 --max_depth 2 --
 
 ## Important Considerations:
 
-- WebDriverWait: Prioritize using WebDriverWait over time.sleep(). It's much more robust and efficient. Inspect the target website's HTML to find suitable elements to wait for.
-- Resource Usage: Selenium uses more resources than requests or requests-html because it's running a full browser.
 - Politeness: Be respectful of the website you're crawling. Use a reasonable crawl_delay, don't overload the server, and respect robots.txt.
-- Website specific selectors: This script will work best if you modify the wait_for_selector to look for website specific elements.
+
