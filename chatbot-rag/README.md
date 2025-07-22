@@ -1,10 +1,10 @@
-# Low-Cost RAG Chatbot Solution
+# Small Scale RAG Chatbot Solution
 
-A serverless, cost-effective generative AI chatbot solution with Retrieval-Augmented Generation (RAG) capabilities for small to medium businesses. **Starting at just $29.76/month** with Graviton3 ARM64 architecture.
+A serverless, cost-effective generative AI chatbot solution with Retrieval-Augmented Generation (RAG) capabilities for small to medium organizations. **Starting at just $30/month** with Graviton3 ARM64 architecture.
 
 ## Solution Overview
 
-This solution provides a customizable chatbot that can be embedded into existing websites. It leverages AWS serverless and managed services with **Graviton3 processors** to minimize costs while delivering superior performance and high availability.
+This solution provides a customizable chatbot that can be embedded into existing websites via Javascript. It leverages AWS serverless and managed services with **Graviton3 processors** to minimize costs while delivering superior performance and high availability.
 
 ### Key Features
 
