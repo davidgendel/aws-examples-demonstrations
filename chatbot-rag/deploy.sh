@@ -100,8 +100,8 @@ fi
 # Check Node.js version
 NODE_VERSION=$(node -v | cut -d 'v' -f 2)
 NODE_MAJOR_VERSION=$(echo "$NODE_VERSION" | cut -d '.' -f 1)
-if [ "$NODE_MAJOR_VERSION" -lt 18 ]; then
-    warning "Node.js version $NODE_VERSION detected. This project recommends Node.js 18 or higher."
+if [ "$NODE_MAJOR_VERSION" -lt 22 ]; then
+    warning "Node.js version $NODE_VERSION detected. This project recommends Node.js 22 or higher."
 else
     echo "Node.js version: $NODE_VERSION"
 fi

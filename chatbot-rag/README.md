@@ -1,10 +1,10 @@
-# Small Scale RAG Chatbot Solution
+# Low-Cost RAG Chatbot Solution
 
-A serverless, cost-effective generative AI chatbot solution with Retrieval-Augmented Generation (RAG) capabilities for small to medium organizations. **Starting at just $30/month** with Graviton3 ARM64 architecture.
+A serverless, cost-effective generative AI chatbot solution with Retrieval-Augmented Generation (RAG) capabilities for small to medium businesses. **Starting at just $29.76/month** with Graviton3 ARM64 architecture.
 
 ## Solution Overview
 
-This solution provides a customizable chatbot that can be embedded into existing websites via Javascript. It leverages AWS serverless and managed services with **Graviton3 processors** to minimize costs while delivering superior performance and high availability.
+This solution provides a customizable chatbot that can be embedded into existing websites. It leverages AWS serverless and managed services with **Graviton3 processors** to minimize costs while delivering superior performance and high availability.
 
 ### Key Features
 
@@ -44,33 +44,33 @@ The solution uses the following AWS services:
 
 ## Cost Estimation
 
-This solution is designed to be cost-effective for small to medium organizations, with **significant cost savings from Graviton3 ARM64 architecture**. Below are detailed cost estimates for three realistic usage scenarios, assuming 15-25 documents with 60MB total storage.
+This solution is designed to be cost-effective for small to medium businesses, with **significant cost savings from Graviton3 ARM64 architecture**. Below are detailed cost estimates for three realistic usage scenarios, assuming 15-25 documents with 60MB total storage.
 
 ### **Detailed Cost Analysis by Usage Scenario**
 
 | **Usage Scenario** | **Daily Users** | **Interactions/User** | **Monthly Cost** | **Annual Cost** | **Cost/User/Month** |
 |-------------------|-----------------|----------------------|------------------|-----------------|-------------------|
-| **Small Organization** | 50 | 10 | **$29.76** | **$357.12** | **$0.60** |
-| **Growing Organization** | 150 | 12 | **$33.52** | **$402.24** | **$0.22** |
-| **Medium Organization** | 500 | 15 | **$72.41** | **$868.92** | **$0.14** |
+| **Small Business** | 50 | 10 | **$29.76** | **$357.12** | **$0.60** |
+| **Growing Business** | 150 | 12 | **$33.52** | **$402.24** | **$0.22** |
+| **Medium Business** | 500 | 15 | **$72.41** | **$868.92** | **$0.14** |
 
 ### **Cost Breakdown by Scenario**
 
-#### **Small Organization (50 users, 500 daily interactions)**
+#### **Small Business (50 users, 500 daily interactions)**
 - **Database (RDS t4g.micro)**: $19.38/month (65.1%)
 - **Security (WAF)**: $8.01/month (26.9%)
 - **AI/ML (Bedrock)**: $0.94/month (3.1%)
 - **Compute (Lambda)**: $1.11/month (3.7%)
 - **Other Services**: $0.32/month (1.2%)
 
-#### **Growing Organization (150 users, 1,800 daily interactions)**
+#### **Growing Business (150 users, 1,800 daily interactions)**
 - **Database (RDS t4g.micro)**: $19.38/month (57.8%)
 - **Security (WAF)**: $8.03/month (24.0%)
 - **AI/ML (Bedrock)**: $3.35/month (10.0%)
 - **Compute (Lambda)**: $1.61/month (4.8%)
 - **Other Services**: $1.15/month (3.4%)
 
-#### **Medium Organization (500 users, 7,500 daily interactions)**
+#### **Medium Business (500 users, 7,500 daily interactions)**
 - **Database (RDS t4g.small)**: $40.87/month (56.4%)
 - **AI/ML (Bedrock)**: $13.96/month (19.3%)
 - **Security (WAF)**: $8.14/month (11.2%)
@@ -79,7 +79,7 @@ This solution is designed to be cost-effective for small to medium organizations
 
 ### **Graviton3 Architecture Cost Savings**
 
-**The savings as as compared to a traditional x86_64 architecture:**
+**Compared to traditional x86_64 architecture:**
 - **Small Business**: $12.60/year savings (40% Lambda cost reduction)
 - **Growing Business**: $15.00/year savings
 - **Medium Business**: $30.12/year savings
@@ -115,23 +115,23 @@ The solution becomes significantly more cost-effective as usage increases:
 - WAF: $8.00/month + $0.60 per 1M requests
 - CloudWatch: $0.50 per GB ingested, $0.03 per GB stored
 
-*Note: All costs are based on US-East-1 pricing as of 2025. Actual costs may vary based on usage patterns, document size, AWS pricing changes, and regional differences. Graviton3 ARM64 architecture provides significant cost savings through improved performance and efficiency.*
+*Note: All costs are based on US-East-1 pricing as of 2024. Actual costs may vary based on usage patterns, document size, AWS pricing changes, and regional differences. Graviton3 ARM64 architecture provides significant cost savings through improved performance and efficiency.*
 
 ### **Cost Optimization Recommendations**
 
-#### **For Small Organization (50 users/day):**
+#### **For Small Business (50 users/day):**
 - **Database**: t4g.micro RDS is sufficient
 - **Provisioned Concurrency**: 1 execution recommended
 - **Alternative**: Consider on-demand only to save $0.91/month (total: $28.85/month)
 - **Total Cost**: $29.76/month
 
-#### **For Growing Organization (150 users/day):**
+#### **For Growing Business (150 users/day):**
 - **Database**: t4g.micro RDS adequate, monitor performance
 - **Provisioned Concurrency**: 1-2 executions based on peak usage
 - **Consider**: Upgrading to 2 executions during high-traffic periods
 - **Total Cost**: $33.52/month
 
-#### **For Medium Organization (500+ users/day):**
+#### **For Medium Business (500+ users/day):**
 - **Database**: Upgrade to t4g.small RDS (included in cost estimate)
 - **Provisioned Concurrency**: 2 executions recommended
 - **Consider**: ElastiCache for improved performance (+$15-20/month)
@@ -152,7 +152,7 @@ The solution becomes significantly more cost-effective as usage increases:
 
 - AWS Account with appropriate permissions
 - AWS CLI installed and configured
-- Node.js 18+ and npm
+- Node.js 22+ and npm 10+
 - AWS CDK v2 installed globally (`npm install -g aws-cdk`)
 - Basic knowledge of AWS services
 
@@ -161,7 +161,7 @@ The solution becomes significantly more cost-effective as usage increases:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/davidgendel/aws-examples-demonstrations/chatbot-rag.git
+git clone https://github.com/yourusername/chatbot-rag.git
 cd chatbot-rag
 ```
 

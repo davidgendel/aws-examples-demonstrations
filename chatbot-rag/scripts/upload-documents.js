@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const AWS = require('aws-sdk');
+const { S3Client, PutObjectCommand, ListBucketsCommand } = require('@aws-sdk/client-s3');
+const { CloudFormationClient, DescribeStacksCommand } = require('@aws-sdk/client-cloudformation');
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
@@ -22,17 +23,18 @@ for (let i = 0; i < args.length; i++) {
 // Load configuration
 const config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), 'utf8'));
 
-// Initialize AWS SDK
-AWS.config.update({ region: config.region });
-const s3 = new AWS.S3();
-const cloudformation = new AWS.CloudFormation();
+// Initialize AWS SDK v3 clients
+const region = config.region || 'us-east-1';
+const s3Client = new S3Client({ region });
+const cfClient = new CloudFormationClient({ region });
 
 // Get stack outputs
 async function getStackOutputs() {
   const stackName = 'ChatbotRagStack';
   
   try {
-    const response = await cloudformation.describeStacks({ StackName: stackName }).promise();
+    const command = new DescribeStacksCommand({ StackName: stackName });
+    const response = await cfClient.send(command);
     const outputs = {};
     
     if (response.Stacks && response.Stacks[0].Outputs) {
@@ -108,8 +110,9 @@ async function uploadFile(filePath, bucketName) {
       Metadata: s3Metadata
     };
     
-    const result = await s3.upload(params).promise();
-    console.log(`Uploaded ${fileName} to ${result.Location} with metadata`);
+    const command = new PutObjectCommand(params);
+    const result = await s3Client.send(command);
+    console.log(`Uploaded ${fileName} to s3://${bucketName}/documents/${fileName} with metadata`);
     return result;
   } catch (error) {
     console.error(`Error uploading ${filePath}:`, error);

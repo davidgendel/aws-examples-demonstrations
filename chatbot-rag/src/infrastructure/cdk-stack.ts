@@ -52,7 +52,7 @@ export class ChatbotRagStack extends cdk.Stack {
     
     // Configure automatic rotation for database credentials
     const rotationLambda = new lambda.Function(this, 'SecretRotationFunction', {
-      runtime: lambda.Runtime.NODEJS_18_X,
+      runtime: lambda.Runtime.NODEJS_22_X,
       architecture: lambda.Architecture.ARM_64, // Graviton3 ARM64 architecture
       handler: 'rotation-handler.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../backend')),
@@ -207,7 +207,7 @@ export class ChatbotRagStack extends cdk.Stack {
 
     // Create main chatbot Lambda function
     const chatbotFunction = new lambda.Function(this, 'ChatbotFunction', {
-      runtime: lambda.Runtime.NODEJS_18_X,
+      runtime: lambda.Runtime.NODEJS_22_X,
       architecture: lambda.Architecture.ARM_64, // Graviton3 ARM64 architecture
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../backend')),
@@ -251,7 +251,7 @@ export class ChatbotRagStack extends cdk.Stack {
 
     // Create document processor Lambda function
     const documentProcessorFunction = new lambda.Function(this, 'DocumentProcessorFunction', {
-      runtime: lambda.Runtime.NODEJS_18_X,
+      runtime: lambda.Runtime.NODEJS_22_X,
       architecture: lambda.Architecture.ARM_64, // Graviton3 ARM64 architecture
       handler: 'document-processor.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../backend')),
