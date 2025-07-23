@@ -1,0 +1,4 @@
+[console_scripts]
+cleanup-db = scripts.cleanup_database:main
+deploy = scripts.deploy:main
+upload-docs = scripts.upload_documents:main

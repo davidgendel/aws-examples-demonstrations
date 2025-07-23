@@ -1,0 +1,74 @@
+# Core AWS SDK
+boto3>=1.34.0
+botocore>=1.34.0
+
+# Database
+psycopg2-binary>=2.9.9
+asyncpg>=0.29.0
+
+# Web framework and async support
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=12.0
+aiofiles>=23.2.0
+
+# Data processing and ML
+numpy>=1.26.0
+pandas>=2.1.0
+scikit-learn>=1.3.0
+
+# Text processing
+nltk>=3.8.1
+textstat>=0.7.3
+python-multipart>=0.0.6
+
+# Caching
+cachetools>=5.3.0
+
+# Configuration and utilities
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+pydantic-settings>=2.1.0
+typing-extensions>=4.8.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+httpx>=0.25.0
+moto[all]>=4.2.0
+
+# Development tools
+black>=23.11.0
+isort>=5.12.0
+flake8>=6.1.0
+mypy>=1.7.0
+
+# Logging and monitoring
+structlog>=23.2.0
+python-json-logger>=2.0.7
+
+# Security
+cryptography>=41.0.0
+python-jose[cryptography]>=3.3.0
+
+# CDK for Python
+aws-cdk-lib>=2.90.0
+constructs>=10.3.0
+
+# Document processing
+PyPDF2>=3.0.1
+python-docx>=1.1.0
+Pillow>=10.1.0
+openpyxl>=3.1.2
+
+# HTTP client (REQUIRED for deployment_validator.py)
+httpx>=0.25.0
+aiohttp>=3.9.0
+requests>=2.31.0
+
+# JSON handling
+orjson>=3.9.0
+
+# Environment and configuration
+python-decouple>=3.8

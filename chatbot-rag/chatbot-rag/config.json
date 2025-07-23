@@ -1,0 +1,100 @@
+{
+  "businessName": "SLG Test",
+  "contactEmail": "dgendel@amazon.com",
+  "businessType": "small",
+  "useCase": "customer_support",
+  "region": "us-east-1",
+  "database": {
+    "instanceType": "db.t4g.micro",
+    "allocatedStorage": 20
+  },
+  "lambda": {
+    "chatbot": {
+      "provisionedConcurrency": {
+        "enabled": true,
+        "concurrentExecutions": 1
+      }
+    }
+  },
+  "api": {
+    "throttling": {
+      "ratePerMinute": 10,
+      "ratePerHour": 100
+    }
+  },
+  "widget": {
+    "defaultTheme": {
+      "primaryColor": "#4287f5",
+      "secondaryColor": "#f5f5f5",
+      "fontFamily": "Arial, sans-serif",
+      "fontSize": "16px",
+      "borderRadius": "8px"
+    }
+  },
+  "bedrock": {
+    "modelId": "amazon.nova-lite-v1",
+    "guardrails": {
+      "createDefault": true,
+      "defaultGuardrailConfig": {
+        "name": "SLG TestGuardrail",
+        "description": "Content guardrail for SLG Test chatbot",
+        "contentPolicyConfig": {
+          "filters": [
+            {
+              "type": "SEXUAL",
+              "strength": "MEDIUM"
+            },
+            {
+              "type": "VIOLENCE",
+              "strength": "MEDIUM"
+            },
+            {
+              "type": "HATE",
+              "strength": "MEDIUM"
+            },
+            {
+              "type": "INSULTS",
+              "strength": "MEDIUM"
+            }
+          ]
+        },
+        "wordPolicyConfig": {
+          "managedWordLists": [
+            {
+              "type": "PROFANITY"
+            }
+          ],
+          "customWordLists": []
+        },
+        "sensitiveInformationPolicyConfig": {
+          "piiEntities": [
+            {
+              "type": "ALL",
+              "action": "BLOCK"
+            }
+          ]
+        },
+        "topicPolicyConfig": {
+          "topics": [
+            {
+              "name": "Politics",
+              "type": "DENY"
+            },
+            {
+              "name": "Financial advice",
+              "type": "DENY"
+            },
+            {
+              "name": "Legal advice",
+              "type": "DENY"
+            },
+            {
+              "name": "Personal information",
+              "type": "DENY"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot API
+  description: API for the RAG chatbot solution
+  version: 1.0.0
+servers:
+  - url: https://your-api-gateway-url.execute-api.region.amazonaws.com/prod
+    description: Production API Gateway
+  - url: https://your-websocket-api-id.execute-api.region.amazonaws.com/prod
+    description: WebSocket API Gateway
+security:
+  - ApiKeyAuth: []
+paths:
+  /chat:
+    post:
+      summary: Send a message to the chatbot
+      description: Send a message to the chatbot and receive a response
+      operationId: sendMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: The message to send to the chatbot
+                  example: What services do you offer?
+                streaming:
+                  type: boolean
+                  description: Whether to use streaming for the response
+                  default: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The chatbot's response
+                  streamingUrl:
+                    type: string
+                    description: URL for WebSocket streaming (if streaming is requested)
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                  details:
+                    type: object
+                    description: Additional error details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Too many requests
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                  details:
+                    type: string
+                    description: Error details
+  /feedback:
+    post:
+      summary: Submit feedback for a chatbot response
+      description: Submit user feedback about the quality of a chatbot response
+      operationId: submitFeedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - responseId
+                - rating
+              properties:
+                responseId:
+                  type: string
+                  description: ID of the response being rated
+                rating:
+                  type: string
+                  description: Rating (positive or negative)
+                  enum: [positive, negative]
+                comment:
+                  type: string
+                  description: Optional comment about the rating
+      responses:
+        '200':
+          description: Feedback submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Feedback submitted successfully
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    WebSocketMessage:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          description: The action to perform
+          enum: [sendMessage, heartbeat]
+        message:
+          type: string
+          description: The message to send (for sendMessage action)
+    WebSocketResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The type of response
+          enum: [start, chunk, end, error, heartbeat]
+        connectionId:
+          type: string
+          description: The WebSocket connection ID
+        text:
+          type: string
+          description: The response text (for chunk and end types)
+        complete:
+          type: boolean
+          description: Whether the response is complete (for end type)
+        error:
+          type: string
+          description: Error message (for error type)
+        details:
+          type: string
+          description: Error details (for error type)
+        timestamp:
+          type: integer
+          description: Timestamp (for heartbeat type)
