@@ -1,0 +1,59 @@
+                                    RAG Chatbot Solution Architecture
+
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │
+│  Client Website │────▶│   CloudFront    │────▶│   S3 Bucket     │
+│  with Embedded  │     │   Distribution  │     │   (Frontend     │
+│  Widget         │     │                 │     │   Assets)       │
+│                 │     │                 │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+          │
+          │ API Requests (REST + WebSocket)
+          ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │
+│   AWS WAF       │────▶│   API Gateway   │────▶│   Lambda        │
+│   (Protection)  │     │   (REST + WS)   │     │   (Chat Logic)  │
+│                 │     │   Rate Limiting │     │                 │
+│                 │     │   API Keys      │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                          │
+                                                          │ Query/Generate
+                                                          ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │
+│   RDS           │◀────│   Lambda        │────▶│   Amazon        │
+│   PostgreSQL    │     │   (Document     │     │   Bedrock       │
+│   + pgvector    │     │   Processor)    │     │   Nova Lite +   │
+│   (Public with  │     │                 │     │   Titan Embed   │
+│   SG protection)│     │                 │     │   + Guardrails  │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+          ▲                       ▲
+          │                       │
+          │ Store Embeddings      │ Process Documents
+          │                       │
+          │               ┌─────────────────┐     ┌─────────────────┐
+          │               │                 │     │                 │
+          └───────────────│   S3 Bucket     │◀────│   Amazon        │
+                          │   (Documents)   │     │   Textract      │
+                          │                 │     │                 │
+                          │                 │     │                 │
+                          └─────────────────┘     └─────────────────┘
+
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │
+│   AWS Secrets   │     │   Security      │     │   CloudWatch    │
+│   Manager       │     │   Groups        │     │   (Monitoring   │
+│   (DB Creds)    │     │   (Network      │     │   & Logging)    │
+│                 │     │   Protection)   │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+
+Key Features:
+- Real-time streaming via WebSocket API
+- Client-side caching for performance
+- Comprehensive security with WAF and guardrails
+- Automatic document processing pipeline
+- Vector similarity search with pgvector
+- Cost-optimized with serverless architecture
+- No VPC NAT Gateway required (reduced costs)
+- SSL/TLS encrypted database connections
